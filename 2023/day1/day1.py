@@ -1,6 +1,7 @@
+import datetime
 import re
 
-with open("./day1/input.txt", "r", encoding="utf-8") as f:
+with open("input.txt", "r", encoding="utf-8") as f:
     lines = f.read().splitlines()
 
 strings = {
@@ -14,7 +15,7 @@ strings = {
     "eight": 8,
     "nine": 9
 }
-
+start = datetime.datetime.now()
 total = 0
 
 for line in lines:
@@ -39,3 +40,6 @@ for line in lines:
     total += int(numbers_str)
 
 print(total)
+
+end = datetime.datetime.now()
+print(end-start)
