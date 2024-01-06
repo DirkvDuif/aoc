@@ -1,6 +1,9 @@
 with open("./2023/day3/input.txt", "r", encoding="utf-8") as f:
     lines = f.read().split("\n")
 
+gears_found = {}
+
+loc = ""
 total = 0
 for i in range(len(lines)):
     digit = ""
@@ -14,17 +17,25 @@ for i in range(len(lines)):
                 if not y < 0 and y < len(lines) :
                     for x in  range(j - 1, j + 2):
                         if not x < 0 and x < len(lines[i]):
-                            if not lines[y][x] == "." and not lines[y][x].isdigit():
-                                symbol = lines[y][x]
+                            if lines[y][x] == "*":
+                                loc = f"{y} {x}"
+                                if not f"{y} {x}" in gears_found:
+                                    gears_found[f"{y} {x}"] = []
                                 symbol_found = True
         else:
             if symbol_found == True and digit != "":
-                total += int(digit)
+                gears_found[loc].append(int(digit))
             symbol_found = False
             digit = ""
+            loc = ""
     else:
         if symbol_found == True and digit != "":
             total += int(digit)
         symbol_found = False
         digit = ""
+
+
+for v in gears_found.values():
+    if len(v) == 2:
+        total += v[0] * v[1]
 print(total)
